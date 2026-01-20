@@ -1,0 +1,35 @@
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.3s ease;
+}
+
+.cursor svg {
+  display: block;
+}
+
+body:has(a:hover) .cursor,
+body:has(button:hover) .cursor,
+body:has([data-cursor]:hover) .cursor {
+  transform: scale(1.5);
+}
+
+/* kleur veranderen bij hover */
+body:has(a:hover) .cursor svg path,
+body:has(button:hover) .cursor svg path,
+body:has([data-cursor]:hover) .cursor svg path {
+  stroke: #DF3838;
+}
+
+.cursor svg path {
+  transition: stroke 0.3s ease;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .cursor {
+    display: none;
+  }
+}

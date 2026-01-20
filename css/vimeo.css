@@ -1,0 +1,24 @@
+/* Placeholder */
+.vimeo-bg[data-vimeo-activated="true"][data-vimeo-loaded="true"] .vimeo-bg__placeholder {
+  opacity: 0;
+  transition-delay: 0.2s;
+}
+
+/* Play/Pause */
+.vimeo-bg .vimeo-bg__pause {
+  display: none;
+}
+
+.vimeo-bg[data-vimeo-playing="true"] .vimeo-bg__pause {
+  display: flex;
+}
+
+.vimeo-bg[data-vimeo-playing="true"] .vimeo-bg__pause,
+.vimeo-bg[data-vimeo-playing="false"] .vimeo-bg__play {
+  opacity: 1;
+}
+
+.vimeo-bg[data-vimeo-playing="true"] .vimeo-bg__play,
+.vimeo-bg[data-vimeo-playing="false"] .vimeo-bg__pause {
+  opacity: 0;
+}
