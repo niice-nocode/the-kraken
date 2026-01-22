@@ -10,3 +10,4 @@ import './globe.js';
 import './faq.js';
 import './footer.js';
 import './slider.js';
+import './images.js';
