@@ -12,3 +12,4 @@ import './footer.js';
 import './slider.js';
 import './images.js';
 import './menu.js';
+import './parallax-hero.js';
