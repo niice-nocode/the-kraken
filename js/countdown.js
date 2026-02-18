@@ -51,10 +51,21 @@ function initCountdown(){
     var f=(root.getAttribute('data-countdown-format')||'plain').toLowerCase();
 
     var inst={
-      root:root,tgt:tgt,f:f,u:u,st:null,done:false,
+      root:root, tgt:tgt, f:f, u:u, st:null, done:false,
+      dur: tgt - Date.now(),  // originele duur opslaan voor repeat
+      repeat: root.getAttribute('data-countdown-repeat') === 'true',
+
       render:function(ms){
         var d=splitByUnits(ms,this.u);
         this.done=d.done;
+
+        // Reset naar originele duur als repeat aan staat
+        if(this.done && this.repeat){
+          this.tgt=Date.now()+this.dur;
+          this.done=false;
+          d=splitByUnits(this.tgt-Date.now(),this.u);
+        }
+
         this.root.setAttribute('data-countdown-status', d.done?'finished':'active');
         if(this.u.years)   this.u.years.textContent   = lab('years',d.years,this.f);
         if(this.u.months)  this.u.months.textContent  = lab('months',d.months,this.f);
@@ -75,7 +86,7 @@ function initCountdown(){
         function t(){
           if(self.done) return self.stopSec();
           var ms=self.tgt-Date.now();
-          if(ms<=0){ self.render(0); return self.stopSec(); }
+          if(ms<=0){ self.render(0); if(!self.repeat) return self.stopSec(); }
           self.render(ms);
         }
         t(); self.st=setInterval(t,1000);
@@ -103,7 +114,6 @@ function initCountdown(){
   if(reg.items.length) startMinTimer();
 }
 
-// Initialize Countdown
 document.addEventListener('DOMContentLoaded', () => {
   initCountdown();
 });
